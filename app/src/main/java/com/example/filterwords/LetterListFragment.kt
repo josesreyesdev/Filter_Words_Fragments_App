@@ -11,19 +11,22 @@ import com.example.filterwords.adapter.LetterAdapter
 import com.example.filterwords.databinding.FragmentLetterListBinding
 
 class LetterListFragment : Fragment() {
-    private var _binding: FragmentLetterListBinding? = null
-    private val binding get() = _binding!!
+    private var _binding: FragmentLetterListBinding? = null /*Establecemos a null ya que no podemos
+     aumentar el diseño hasta que se llame a onCreateView()  */
+    private val binding get() = _binding!! /*Add dos signos de admiracion cuando sabemos que al acceder
+     a _binding no sera nulo. get() => se utiliza para solo obtener, quiere decir que puedo ontener un valor
+     pero, una vez asignado no puedo asignarlo a otro elemento */
 
     private lateinit var recyclerView: RecyclerView
     private var isLinearLayoutManager = true
 
-    //Configurando las opciones del menu
+    //Configurando las opciones del menu u obtener los argumentos pasados en fragments anteriores
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    //Aumenta la vista
+    //Aumenta el diseño
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,7 +36,7 @@ class LetterListFragment : Fragment() {
         return binding.root
     }
 
-    //implementando el recyclerView
+    //vinculando vistas especificas ej: el recyclerView, o llamando a findViewById() de todas las vistas
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
         chooseLayout()
@@ -45,7 +48,9 @@ class LetterListFragment : Fragment() {
         _binding = null
     }
 
+
     //Aumentando el menu de opciones
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_menu, menu)
 
@@ -53,16 +58,17 @@ class LetterListFragment : Fragment() {
         setIcon(layoutButton)
     }
 
+
     private fun chooseLayout() { //escogerLayout
-        /*if (isLinearLayoutManager) {
+        if (isLinearLayoutManager) {
             recyclerView.layoutManager = LinearLayoutManager(context)
         } else {
             recyclerView.layoutManager = GridLayoutManager(context, 4)
         }
-        recyclerView.adapter = LetterAdapter() */
+        recyclerView.adapter = LetterAdapter()
 
         // Lo mismo pero mas varato
-        when (isLinearLayoutManager) {
+        /*when (isLinearLayoutManager) {
             true -> {
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = LetterAdapter()
@@ -71,7 +77,7 @@ class LetterListFragment : Fragment() {
                 recyclerView.layoutManager = GridLayoutManager(context, 4)
                 recyclerView.adapter = LetterAdapter()
             }
-        }
+        }*/
     }
 
     private fun setIcon(menuItem: MenuItem?) {
@@ -83,7 +89,8 @@ class LetterListFragment : Fragment() {
             else ContextCompat.getDrawable( this.requireContext(), R.drawable.ic_linear_layout)
     }
 
-    //Llama cuando se seleccione el botón
+    //Llama a este metodo cuando se seleccione el botón de los iconnos
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_switch_layout -> {
@@ -94,5 +101,4 @@ class LetterListFragment : Fragment() {
             } else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

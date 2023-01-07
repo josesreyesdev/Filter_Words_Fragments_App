@@ -1,12 +1,10 @@
 package com.example.filterwords.adapter
 
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
-import androidx.annotation.RequiresApi
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filterwords.LetterListFragmentDirections
@@ -30,7 +28,7 @@ class LetterAdapter: RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
-        val item = list.get(position)
+        val item = list[position]
         holder.button.text = item.toString()
 
         //configurando el intent en el onClickListener para cada letra
@@ -39,7 +37,6 @@ class LetterAdapter: RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
                 letter = holder.button.text.toString()
             )
             holder.view.findNavController().navigate(action)
-
         }
     }
 
@@ -49,7 +46,7 @@ class LetterAdapter: RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
     // Setup custom accessibility delegate to set the text read with an accessibility service
     // Conf. el delegado de accesibilidad personalizado para conf. el texto leído con un servicio de accesibilidad
     companion object Accessibility : View.AccessibilityDelegate() {
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun onInitializeAccessibilityNodeInfo(
             host: View?,
             info: AccessibilityNodeInfo?

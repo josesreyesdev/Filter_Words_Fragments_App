@@ -26,9 +26,11 @@ class WordListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let { argumentsNoNull ->
-            letterId = argumentsNoNull.getString(LETTER).toString()
+        //Get parameters or values of preview view
+        arguments?.let { argumentsNotNull ->
+            letterId = argumentsNotNull.getString(LETTER).toString()
         }
+        /*arguments?.let { letterId = it.getString(LETTER).toString() }*/
     }
 
     //Aumentando el diseño
@@ -51,7 +53,6 @@ class WordListFragment : Fragment() {
         recyclerView.addItemDecoration(
             DividerItemDecoration( context, DividerItemDecoration.VERTICAL)
         )
-
         //title = getString(R.string.detail_prefix) + " " + letterId
     }
 

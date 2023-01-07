@@ -71,7 +71,7 @@ class WordAdapter( context: Context, private val letterId: String ):
     // Setup custom accessibility delegate to set the text read with
     // an accessibility service
     companion object Accessibility : View.AccessibilityDelegate() {
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun onInitializeAccessibilityNodeInfo(
             host: View?,
             info: AccessibilityNodeInfo?

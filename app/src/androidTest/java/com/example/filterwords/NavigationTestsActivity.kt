@@ -13,7 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class) //Ejecutor de pruebas
-class NavigationTests {
+class NavigationTestsActivity {
 
     @get:Rule() // Iniciando la actividad de pruebas
     val activity = ActivityScenarioRule(MainActivity::class.java)

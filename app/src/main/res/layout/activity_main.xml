@@ -6,15 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="16dp"/>
-        -->
-
+    <!-- FragmentContainerView => Aumenta el FragmentContainerView diseño que se mostrara al inicio
+        navHost => Se usa par amostrar destinos de un grafico de navegacion en un activity.
+                   Al navegar entre fragments se usa por default NavHostFragment, ,tambien se puede poder un fragment en particular
+        defaultNavHost => true :> Permite que el contenedor del fragmento interactue con la jerarquia de la navagacion
+                                  ej: cuando se presiona el btn atras
+        navController => Controla la navegacion entre los destinos que se muestran en el navHost
+     -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
