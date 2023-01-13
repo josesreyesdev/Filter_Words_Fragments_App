@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filterwords.adapter.LetterAdapter
+import com.example.filterwords.data.SettingsDataStore
 import com.example.filterwords.databinding.FragmentLetterListBinding
+import kotlinx.coroutines.launch
 
 class LetterListFragment : Fragment() {
     private var _binding: FragmentLetterListBinding? = null /*Establecemos a null ya que no podemos
@@ -19,6 +23,9 @@ class LetterListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private var isLinearLayoutManager = true
+
+    //Setting DataStore
+    private lateinit var SettingsDataStore: SettingsDataStore
 
     //Configurando las opciones del menu u obtener los argumentos pasados en fragments anteriores
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +47,16 @@ class LetterListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
         chooseLayout()
+
+        //Initialize SettingDataStore
+        SettingsDataStore = SettingsDataStore( requireContext())
+        SettingsDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) { value ->
+            isLinearLayoutManager = value
+            chooseLayout()
+
+            //Redraw the menu
+            activity?.invalidateOptionsMenu()
+        }
     }
 
     //Reestableciendo la propiedad _binding a null
@@ -50,7 +67,6 @@ class LetterListFragment : Fragment() {
 
 
     //Aumentando el menu de opciones
-    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_menu, menu)
 
@@ -89,14 +105,19 @@ class LetterListFragment : Fragment() {
             else ContextCompat.getDrawable( this.requireContext(), R.drawable.ic_linear_layout)
     }
 
-    //Llama a este metodo cuando se seleccione el botón de los iconnos
-    @Deprecated("Deprecated in Java")
+    //Llama a este metodo cuando se seleccione el botón de los iconos
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_switch_layout -> {
                 isLinearLayoutManager = !isLinearLayoutManager
                 chooseLayout()
                 setIcon(item)
+
+                //Launch a coroutine and write the layout setting in the preference DataStore
+                lifecycleScope.launch {
+                    SettingsDataStore.saveLayoutToPrefencesStore(isLinearLayoutManager, requireContext())
+                }
+
                 return true
             } else -> super.onOptionsItemSelected(item)
         }
