@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace 'com.example.filterwords'
     compileSdk 33
     buildToolsVersion "30.0.3"
 
@@ -26,11 +27,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures{
         viewBinding true
@@ -49,20 +50,20 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation 'androidx.fragment:fragment-ktx:1.6.0'
 
     //DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 
     //Testing
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation 'androidx.navigation:navigation-testing:2.5.3'
+    androidTestImplementation 'androidx.navigation:navigation-testing:2.6.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
 
     implementation 'androidx.test.ext:junit-ktx:1.1.5'
-    implementation 'androidx.navigation:navigation-testing:2.5.3'
-    debugImplementation 'androidx.fragment:fragment-testing:1.5.5'
+    implementation 'androidx.navigation:navigation-testing:2.6.0'
+    debugImplementation 'androidx.fragment:fragment-testing:1.6.0'
 }
