@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.filterwords
 
 import android.os.Bundle
@@ -38,7 +40,7 @@ class LetterListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLetterListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -67,6 +69,7 @@ class LetterListFragment : Fragment() {
 
 
     //Aumentando el menu de opciones
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_menu, menu)
 
@@ -76,36 +79,23 @@ class LetterListFragment : Fragment() {
 
 
     private fun chooseLayout() { //escogerLayout
-        if (isLinearLayoutManager) {
-            recyclerView.layoutManager = LinearLayoutManager(context)
-        } else {
-            recyclerView.layoutManager = GridLayoutManager(context, 4)
-        }
-        recyclerView.adapter = LetterAdapter()
+        val layout =
+            if (isLinearLayoutManager) LinearLayoutManager(context)
+            else GridLayoutManager(context, 4)
 
-        // Lo mismo pero mas varato
-        /*when (isLinearLayoutManager) {
-            true -> {
-                recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = LetterAdapter()
-            }
-            false -> {
-                recyclerView.layoutManager = GridLayoutManager(context, 4)
-                recyclerView.adapter = LetterAdapter()
-            }
-        }*/
+        recyclerView.layoutManager = layout
+        recyclerView.adapter = LetterAdapter()
     }
 
     private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null)
             return
-        menuItem.icon =
-            if (isLinearLayoutManager)
-                ContextCompat.getDrawable( this.requireContext(), R.drawable.ic_grid_layout)
-            else ContextCompat.getDrawable( this.requireContext(), R.drawable.ic_linear_layout)
+        val icon = if (isLinearLayoutManager) R.drawable.ic_grid_layout else R.drawable.ic_linear_layout
+        menuItem.icon = ContextCompat.getDrawable( this.requireContext(), icon)
     }
 
     //Llama a este metodo cuando se seleccione el botón de los iconos
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_switch_layout -> {

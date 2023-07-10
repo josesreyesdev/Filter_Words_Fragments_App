@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <!-- FragmentContainerView => Aumenta el FragmentContainerView diseño que se mostrara al inicio
-        navHost => Se usa par amostrar destinos de un grafico de navegacion en un activity.
-                   Al navegar entre fragments se usa por default NavHostFragment, ,tambien se puede poder un fragment en particular
+        navHost => Se usa para mostrar destinos de un grafico de navegacion en un activity.
+                   Al navegar entre fragments se usa por default NavHostFragment, tambien se puede poner un fragment en particular
         defaultNavHost => true :> Permite que el contenedor del fragmento interactue con la jerarquia de la navagacion
                                   ej: cuando se presiona el btn atras
         navController => Controla la navegacion entre los destinos que se muestran en el navHost

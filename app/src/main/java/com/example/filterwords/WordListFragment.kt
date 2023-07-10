@@ -27,8 +27,8 @@ class WordListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         //Get parameters or values of preview view
-        arguments?.let { argumentsNotNull ->
-            letterId = argumentsNotNull.getString(LETTER).toString()
+        arguments?.let { letterSelected ->
+            letterId = letterSelected.getString(LETTER).toString()
         }
         /*arguments?.let { letterId = it.getString(LETTER).toString() }*/
     }
@@ -38,7 +38,7 @@ class WordListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWordListBinding.inflate(inflater, container, false)
         return binding.root
     }
