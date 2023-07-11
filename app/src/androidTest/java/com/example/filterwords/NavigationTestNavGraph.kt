@@ -43,7 +43,7 @@ class NavigationTestNavGraph {
         //Activando evento que solicita la navegacion
         onView(withId(R.id.recycler_view))
             .perform( RecyclerViewActions
-                    .actionOnItemAtPosition<RecyclerView.ViewHolder>( 2, click()))
+                .actionOnItemAtPosition<RecyclerView.ViewHolder>( 2, click()))
 
         //Verificando el destino del controlador de navegacion en este caso wordListFragment
         assertEquals(navController.currentDestination?.id, R.id.wordListFragment)
