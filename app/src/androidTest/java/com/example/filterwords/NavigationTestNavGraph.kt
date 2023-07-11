@@ -18,21 +18,19 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class NavigationTestNavGraph {
 
-    lateinit var navController: TestNavHostController
+    private lateinit var navController: TestNavHostController
 
-    lateinit var exampleFragmentScenario: FragmentScenario<LetterListFragment>
+    private lateinit var exampleFragmentScenario: FragmentScenario<LetterListFragment>
 
     @Test
     fun navigate_to_words_nav_component() {
 
         //Instancia de prueba del controlador de navegacion
-        val navController = TestNavHostController(
-            ApplicationProvider.getApplicationContext()
-        )
+        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
 
         //Dependencia especifica del fragmento a utilizar y el theme que debe usar
-        val letterListScenario = launchFragmentInContainer<LetterListFragment>( themeResId =
-        R.style.Theme_FilterWords)
+        val letterListScenario =
+            launchFragmentInContainer<LetterListFragment>( themeResId = R.style.Theme_FilterWords)
 
         /** Declaro de forma explicita el grafico de navegacion que queremos q utilice
         el controlador de navegacion para el fragmento lanzado */
